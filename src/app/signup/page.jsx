@@ -91,9 +91,9 @@ export default function SignUp() {
   const onSignUp = async () => {
     try {
       setLoading(true);
-      const response = await axios.post('/api/users/signup', user);
-      console.log('Signup success', response.data);
-      router.push('/login');
+      const response = await axios.post('/api/users/signup', user);      
+      localStorage.setItem('email', JSON.stringify(response.data.savedUser.email));
+      router.push('/verifyemail');
     } catch (error) {
       if (error.response && error.response.status === 400) {
         setErrorMessage(

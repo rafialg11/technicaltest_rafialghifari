@@ -25,8 +25,10 @@ export default function Login() {
       console.log('Login success', response.data);
       router.push('/');
     } catch (error) {
-      if (error.response && error.response.status === 401) {
-        setErrorMessage(`The email and password you entered don't match. Please try again`);
+      if (error.response && error.response.status === 404) {
+        setErrorMessage(
+          `The email and password you entered don't match. Please try again`,
+        );
         setShowErrorMessage(true);
       } else {
         console.log('Login failed', error.message);
@@ -59,19 +61,19 @@ export default function Login() {
             label={'Email Address'}
             placeholder={'Email'}
             value={user.email}
-            onChange={(e) => setUser({...user, email: e.target.value})}
+            onChange={(e) => setUser({ ...user, email: e.target.value })}
           />
           <Input
             label={' Password'}
             placeholder={'Password'}
             type={'password'}
             value={user.password}
-            onChange={(e) => setUser({...user, password: e.target.value})}
+            onChange={(e) => setUser({ ...user, password: e.target.value })}
           />
           {showErrorMessage && (
             <div
               className={'p-4 bg-cream text-xs text-gray-600 mb-2 rounded-md'}
-            >              
+            >
               {errorMessage}
             </div>
           )}

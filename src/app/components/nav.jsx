@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Button from '@/app/components/button';
 import Link from 'next/link';
 
-export default function Navigation({ isLoggedIn }) {
+export default function Navigation({ isLoggedIn, handleLogout }) {
   return (
     <div className="flex justify-between px-12">
       <Image
@@ -15,7 +15,15 @@ export default function Navigation({ isLoggedIn }) {
         className="my-6"
       />
       <div className="my-auto">
-        {!isLoggedIn && (
+        {isLoggedIn ? (
+          <Link href={'/login'}>
+            <Button
+              text="Logout"
+              variant="btn-primary"
+              onClick={handleLogout}
+            />
+          </Link>
+        ) : (
           <>
             <Link href={'/login'}>
               <Button text="Login" variant="btn-noStyle" />

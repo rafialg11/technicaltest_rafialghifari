@@ -1,5 +1,5 @@
 'use client';
-import Image from 'next/image';
+
 export default function Home() {
   return (
     <main className={'bg-gray1 flex h-[calc(100vh-4.125rem)] justify-center'}>
