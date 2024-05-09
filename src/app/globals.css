@@ -100,5 +100,3 @@ video {
 .btn-noStyle {
   @apply text-primary font-medium text-sm py-1.5 px-2 rounded hover:font-bold transition duration-300;
 }
-
-

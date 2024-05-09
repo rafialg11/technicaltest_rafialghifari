@@ -16,7 +16,7 @@ module.exports = {
         'btn-nav': '#336FF9',
         'status-done': '#05B205',
         secondary: '#79889D',
-        darker: '#1a1a1a'
+        darker: '#1a1a1a',
       },
     },
   },
