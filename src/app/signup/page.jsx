@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import Lottie from 'lottie-react';
-import loadingAnimation from '../../../public/loadingAnimation.json'
+import loadingAnimation from '../../../public/loadingAnimation.json';
 
 //password rule validation
 const passwordRules = [
@@ -50,33 +50,33 @@ export default function SignUp() {
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  //password validation state  
+  //password validation state
   const [passwordErrors, setPasswordErrors] = useState([]);
   const [showPasswordErrors, setshowPasswordErrors] = useState(false);
 
   useEffect(() => {
     const allFilledAndValid =
-    user.email.length > 0 &&
-    passwordErrors.length < 1 &&
-    user.username.length > 0 &&
-    user.password.length >= 7;
-  setButtonDisabled(!allFilledAndValid);
+      user.email.length > 0 &&
+      passwordErrors.length < 1 &&
+      user.username.length > 0 &&
+      user.password.length >= 7;
+    setButtonDisabled(!allFilledAndValid);
   }, [user, passwordErrors]);
 
   const handleEmail = (e) => {
     const emailValue = e.target.value;
     const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
-    if (!isValidEmail && emailValue !== "") {
-      setErrorMessage("Please enter a valid email address");
+    if (!isValidEmail && emailValue !== '') {
+      setErrorMessage('Please enter a valid email address');
       setShowErrorMessage(true);
     } else {
       setShowErrorMessage(false);
     }
-    setUser({...user, email: emailValue });
-  }
+    setUser({ ...user, email: emailValue });
+  };
 
   const handlePassword = (e) => {
-    const passwordValue = e.target.value;    
+    const passwordValue = e.target.value;
     setUser({ ...user, password: passwordValue });
     if (passwordValue === '') {
       setPasswordErrors(passwordRules.map((rule) => rule.label));
@@ -93,10 +93,12 @@ export default function SignUp() {
       setLoading(true);
       const response = await axios.post('/api/users/signup', user);
       console.log('Signup success', response.data);
-      router.push('/login');      
+      router.push('/login');
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        setErrorMessage("Oops! It seems this email is already in use. Please try another email address or sign in with your existing account");
+        setErrorMessage(
+          'Oops! It seems this email is already in use. Please try another email address or sign in with your existing account',
+        );
         setShowErrorMessage(true);
       } else {
         console.log('Signup failed', error.message);
@@ -122,7 +124,7 @@ export default function SignUp() {
           <Input
             label={'Email Address'}
             placeholder={'Email'}
-            type={'email'}            
+            type={'email'}
             onChange={handleEmail}
           />
           {showErrorMessage && (
@@ -135,7 +137,7 @@ export default function SignUp() {
           <Input
             label={'Create Password'}
             placeholder={'Password'}
-            type={'password'}            
+            type={'password'}
             onChange={handlePassword}
           />
           {showPasswordErrors && (
@@ -169,28 +171,32 @@ export default function SignUp() {
             </div>
           )}
           <button
-      className={`bg-primary text-white text-xs py-2 rounded-md mt-5 min-h-[2.5rem] ${buttonDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-darker transition duration-300 cursor-pointer'}`}
-      disabled={buttonDisabled || loading}
-      onClick={onSignUp}
-      style={{ position: 'relative' }}
-    >
-      {loading ? (
-        <div
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '80px',
-            height: '80px',
-          }}
-        >
-          <Lottie animationData={loadingAnimation} loop={true} style={{ width: '100%', height: '100%' }} />        
-        </div>
-      ) : (
-        'Sign Up'
-      )}
-    </button>
+            className={`bg-primary text-white text-xs py-2 rounded-md mt-5 min-h-[2.5rem] ${buttonDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-darker transition duration-300 cursor-pointer'}`}
+            disabled={buttonDisabled || loading}
+            onClick={onSignUp}
+            style={{ position: 'relative' }}
+          >
+            {loading ? (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  width: '80px',
+                  height: '80px',
+                }}
+              >
+                <Lottie
+                  animationData={loadingAnimation}
+                  loop={true}
+                  style={{ width: '100%', height: '100%' }}
+                />
+              </div>
+            ) : (
+              'Sign Up'
+            )}
+          </button>
         </div>
         <p className={'text-center text-xs mt-8 font-semibold'}>
           By creating an account you agree with our{' '}
