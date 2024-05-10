@@ -14,12 +14,10 @@ export default function VerifyEmail() {
       await axios.post('/api/users/verifyemail', { token });
       setVerified(true);
     } catch (error) {
-      setError(true);
-      console.log(error.response.data);
+      router.push('/signup');
+      alert(JSON.stringify(error.response.data.error));
     }
   };
-
-  // aku ingin memanggil api
 
   useEffect(() => {
     const urlToken = window.location.search.split('=')[1];

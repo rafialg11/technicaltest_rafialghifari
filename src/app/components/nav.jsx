@@ -14,15 +14,21 @@ export default function Navigation() {
       const response = await axios.get('/api/users/getuser');
       if (response.data.data) {
         setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
       }
     } catch (error) {
-      setIsLoggedIn(false);
+      if (error.response && error.response.status === 400) {
+        setIsLoggedIn(false);
+      } else {        
+        console.error(error);
+      }
     }
   };
+
   useEffect(() => {
     checkLoginStatus();
-  }, [checkLoginStatus()]);
-
+  }, []); 
   const handleLogout = async () => {
     try {
       await axios.get('/api/users/logout');
@@ -31,9 +37,7 @@ export default function Navigation() {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  console.log(isLoggedIn);
+  };  
 
   return (
     <div className="flex justify-between px-12">
