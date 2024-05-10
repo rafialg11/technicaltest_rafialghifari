@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import Lottie from 'lottie-react';
 import loadingAnimation from '../../../public/loadingAnimation.json';
+import Navigation from '@/app/components/nav';
 
 //password rule validation
 const passwordRules = [
@@ -91,8 +92,11 @@ export default function SignUp() {
   const onSignUp = async () => {
     try {
       setLoading(true);
-      const response = await axios.post('/api/users/signup', user);      
-      localStorage.setItem('email', JSON.stringify(response.data.savedUser.email));
+      const response = await axios.post('/api/users/signup', user);
+      localStorage.setItem(
+        'email',
+        JSON.stringify(response.data.savedUser.email),
+      );
       router.push('/verifyemail');
     } catch (error) {
       if (error.response && error.response.status === 400) {
@@ -109,117 +113,120 @@ export default function SignUp() {
   };
 
   return (
-    <main
-      className={'bg-gray1 flex min-h-[calc(100vh-4.125rem)] justify-center'}
-    >
-      <div className={'flex flex-col my-10 mx-auto max-w-96'}>
-        <h1 className={'font-semibold text-lg pb-4'}>Sign up to Maia</h1>
-        <div className={'flex flex-col container-sm'}>
-          <Input
-            label={'Your Name'}
-            placeholder={'Your Name'}
-            value={user.username}
-            onChange={(e) => setUser({ ...user, username: e.target.value })}
-          />
-          <Input
-            label={'Email Address'}
-            placeholder={'Email'}
-            type={'email'}
-            onChange={handleEmail}
-          />
-          {showErrorMessage && (
-            <div
-              className={'p-4 bg-cream text-xs text-gray-600 mb-2 rounded-md'}
-            >
-              {errorMessage}
-            </div>
-          )}
-          <Input
-            label={'Create Password'}
-            placeholder={'Password'}
-            type={'password'}
-            onChange={handlePassword}
-          />
-          {showPasswordErrors && (
-            <div
-              className={
-                'p-4 bg-cream text-xs text-gray-600 rounded-md space-y-2'
-              }
-            >
-              {passwordRules.map((rule, index) => (
-                <div key={index} className={'flex align-middle'}>
-                  {passwordErrors.includes(rule.label) ? (
-                    <Image
-                      src={'/uncheck.svg'}
-                      alt={'uncheck'}
-                      width={12}
-                      height={12}
-                      className={'mr-2'}
-                    />
-                  ) : (
-                    <Image
-                      src={'/check.svg'}
-                      alt={'check'}
-                      width={12}
-                      height={12}
-                      className={'mr-2'}
-                    />
-                  )}
-                  <p>{rule.label}</p>
-                </div>
-              ))}
-            </div>
-          )}
-          <button
-            className={`bg-primary text-white text-xs py-2 rounded-md mt-5 min-h-[2.5rem] ${buttonDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-darker transition duration-300 cursor-pointer'}`}
-            disabled={buttonDisabled || loading}
-            onClick={onSignUp}
-            style={{ position: 'relative' }}
-          >
-            {loading ? (
+    <>
+      <Navigation />
+      <main
+        className={'bg-gray1 flex min-h-[calc(100vh-4.125rem)] justify-center'}
+      >
+        <div className={'flex flex-col my-10 mx-auto max-w-96'}>
+          <h1 className={'font-semibold text-lg pb-4'}>Sign up to Maia</h1>
+          <div className={'flex flex-col container-sm'}>
+            <Input
+              label={'Your Name'}
+              placeholder={'Your Name'}
+              value={user.username}
+              onChange={(e) => setUser({ ...user, username: e.target.value })}
+            />
+            <Input
+              label={'Email Address'}
+              placeholder={'Email'}
+              type={'email'}
+              onChange={handleEmail}
+            />
+            {showErrorMessage && (
               <div
-                style={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  width: '80px',
-                  height: '80px',
-                }}
+                className={'p-4 bg-cream text-xs text-gray-600 mb-2 rounded-md'}
               >
-                <Lottie
-                  animationData={loadingAnimation}
-                  loop={true}
-                  style={{ width: '100%', height: '100%' }}
-                />
+                {errorMessage}
               </div>
-            ) : (
-              'Sign Up'
             )}
-          </button>
+            <Input
+              label={'Create Password'}
+              placeholder={'Password'}
+              type={'password'}
+              onChange={handlePassword}
+            />
+            {showPasswordErrors && (
+              <div
+                className={
+                  'p-4 bg-cream text-xs text-gray-600 rounded-md space-y-2'
+                }
+              >
+                {passwordRules.map((rule, index) => (
+                  <div key={index} className={'flex align-middle'}>
+                    {passwordErrors.includes(rule.label) ? (
+                      <Image
+                        src={'/uncheck.svg'}
+                        alt={'uncheck'}
+                        width={12}
+                        height={12}
+                        className={'mr-2'}
+                      />
+                    ) : (
+                      <Image
+                        src={'/check.svg'}
+                        alt={'check'}
+                        width={12}
+                        height={12}
+                        className={'mr-2'}
+                      />
+                    )}
+                    <p>{rule.label}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+            <button
+              className={`bg-primary text-white text-xs py-2 rounded-md mt-5 min-h-[2.5rem] ${buttonDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-darker transition duration-300 cursor-pointer'}`}
+              disabled={buttonDisabled || loading}
+              onClick={onSignUp}
+              style={{ position: 'relative' }}
+            >
+              {loading ? (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: '80px',
+                    height: '80px',
+                  }}
+                >
+                  <Lottie
+                    animationData={loadingAnimation}
+                    loop={true}
+                    style={{ width: '100%', height: '100%' }}
+                  />
+                </div>
+              ) : (
+                'Sign Up'
+              )}
+            </button>
+          </div>
+          <p className={'text-center text-xs mt-8 font-semibold'}>
+            By creating an account you agree with our{' '}
+            <span className={'underline'}>
+              <a href={'https://www.youtube.com/watch?v=xvFZjo5PgG0'}>
+                Terms of Service
+              </a>
+            </span>{' '}
+            and
+            <span className={'underline'}>
+              <a href={'https://www.youtube.com/watch?v=xvFZjo5PgG0'}>
+                {' '}
+                Privacy Policy
+              </a>
+            </span>
+          </p>
+          <p className={'text-center text-xs my-4 font-semibold'}>
+            Already have an account?{' '}
+            <span className={'underline'}>
+              <Link href={'/login'}>Sign In</Link>
+            </span>
+          </p>
         </div>
-        <p className={'text-center text-xs mt-8 font-semibold'}>
-          By creating an account you agree with our{' '}
-          <span className={'underline'}>
-            <a href={'https://www.youtube.com/watch?v=xvFZjo5PgG0'}>
-              Terms of Service
-            </a>
-          </span>{' '}
-          and
-          <span className={'underline'}>
-            <a href={'https://www.youtube.com/watch?v=xvFZjo5PgG0'}>
-              {' '}
-              Privacy Policy
-            </a>
-          </span>
-        </p>
-        <p className={'text-center text-xs my-4 font-semibold'}>
-          Already have an account?{' '}
-          <span className={'underline'}>
-            <Link href={'/login'}>Sign In</Link>
-          </span>
-        </p>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }

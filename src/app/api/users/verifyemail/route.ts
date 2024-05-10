@@ -25,11 +25,11 @@ export async function POST(request: NextRequest) {
 
     await user.save();
     if (user) {
-        return NextResponse.json(
-          { message: 'Email verified successfully', email: user.email },
-          { status: 200 },
-        );
-      }
+      return NextResponse.json(
+        { message: 'Email verified successfully', email: user.email },
+        { status: 200 },
+      );
+    }
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }

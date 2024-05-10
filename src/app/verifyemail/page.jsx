@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import Navigation from '@/app/components/nav';
 
 export default function VerifyEmail() {
   const router = useRouter();
@@ -20,8 +21,8 @@ export default function VerifyEmail() {
 
   // aku ingin memanggil api
 
-  useEffect(() => {    
-    const urlToken = window.location.search.split('=')[1];    
+  useEffect(() => {
+    const urlToken = window.location.search.split('=')[1];
     setToken(urlToken || '');
   }, []);
 
@@ -38,19 +39,24 @@ export default function VerifyEmail() {
   }, [verified, router]);
 
   return (
-    <main className={'bg-gray1 flex h-[calc(100vh-4.125rem)] justify-center'}>
-      <div className={'flex flex-col mt-24 max-w-[32rem]'}>
-        <h1 className={'font-semibold text-lg pb-4'}>
-          Verify Your Email to Get Started
-        </h1>
-        <div className={'container-sm bg-white p-4 text-secondary rounded-md'}>
-          <p className={'text-xs'}>
-            A confirmation link has been sent to your email address{' '}
-            <span className={'font-bold'}>{email}</span>. Click the
-            link to verify your account and unlock full access.{' '}
-          </p>
+    <>
+      <Navigation />
+      <main className={'bg-gray1 flex h-[calc(100vh-4.125rem)] justify-center'}>
+        <div className={'flex flex-col mt-24 max-w-[32rem]'}>
+          <h1 className={'font-semibold text-lg pb-4'}>
+            Verify Your Email to Get Started
+          </h1>
+          <div
+            className={'container-sm bg-white p-4 text-secondary rounded-md'}
+          >
+            <p className={'text-xs'}>
+              A confirmation link has been sent to your email address{' '}
+              <span className={'font-bold'}>{email}</span>. Click the link to
+              verify your account and unlock full access.{' '}
+            </p>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }

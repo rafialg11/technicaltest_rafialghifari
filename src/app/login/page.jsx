@@ -6,6 +6,7 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import Lottie from 'lottie-react';
 import loadingAnimation from '../../../public/loadingAnimation.json';
+import Navigation from '@/app/components/nav';
 
 export default function Login() {
   const router = useRouter();
@@ -47,71 +48,74 @@ export default function Login() {
   });
 
   return (
-    <main
-      className={'bg-gray1 flex min-h-[calc(100vh-4.125rem)] justify-center'}
-    >
-      <div className={'flex flex-col my-10 mx-auto max-w-96'}>
-        <h1 className={'font-semibold text-lg pb-4'}>Welcome Back!</h1>
-        <p className={'text-xs mb-8 font-medium'}>
-          Sign in below to access your workspace and continue your projects.
-          Let's pick up where you left off!
-        </p>
-        <div className={'flex flex-col container-sm'}>
-          <Input
-            label={'Email Address'}
-            placeholder={'Email'}
-            value={user.email}
-            onChange={(e) => setUser({ ...user, email: e.target.value })}
-          />
-          <Input
-            label={' Password'}
-            placeholder={'Password'}
-            type={'password'}
-            value={user.password}
-            onChange={(e) => setUser({ ...user, password: e.target.value })}
-          />
-          {showErrorMessage && (
-            <div
-              className={'p-4 bg-cream text-xs text-gray-600 mb-2 rounded-md'}
-            >
-              {errorMessage}
-            </div>
-          )}
-          <button
-            className={`bg-primary text-white text-xs py-2 rounded-md mt-5 min-h-[2.5rem] ${buttonDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-darker transition duration-300 cursor-pointer'}`}
-            disabled={buttonDisabled || loading}
-            onClick={onLogin}
-            style={{ position: 'relative' }}
-          >
-            {loading ? (
+    <>
+      <Navigation />
+      <main
+        className={'bg-gray1 flex min-h-[calc(100vh-4.125rem)] justify-center'}
+      >
+        <div className={'flex flex-col my-10 mx-auto max-w-96'}>
+          <h1 className={'font-semibold text-lg pb-4'}>Welcome Back!</h1>
+          <p className={'text-xs mb-8 font-medium'}>
+            Sign in below to access your workspace and continue your projects.
+            Let's pick up where you left off!
+          </p>
+          <div className={'flex flex-col container-sm'}>
+            <Input
+              label={'Email Address'}
+              placeholder={'Email'}
+              value={user.email}
+              onChange={(e) => setUser({ ...user, email: e.target.value })}
+            />
+            <Input
+              label={' Password'}
+              placeholder={'Password'}
+              type={'password'}
+              value={user.password}
+              onChange={(e) => setUser({ ...user, password: e.target.value })}
+            />
+            {showErrorMessage && (
               <div
-                style={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  width: '80px',
-                  height: '80px',
-                }}
+                className={'p-4 bg-cream text-xs text-gray-600 mb-2 rounded-md'}
               >
-                <Lottie
-                  animationData={loadingAnimation}
-                  loop={true}
-                  style={{ width: '100%', height: '100%' }}
-                />
+                {errorMessage}
               </div>
-            ) : (
-              'Sign Up'
             )}
-          </button>
+            <button
+              className={`bg-primary text-white text-xs py-2 rounded-md mt-5 min-h-[2.5rem] ${buttonDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-darker transition duration-300 cursor-pointer'}`}
+              disabled={buttonDisabled || loading}
+              onClick={onLogin}
+              style={{ position: 'relative' }}
+            >
+              {loading ? (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: '80px',
+                    height: '80px',
+                  }}
+                >
+                  <Lottie
+                    animationData={loadingAnimation}
+                    loop={true}
+                    style={{ width: '100%', height: '100%' }}
+                  />
+                </div>
+              ) : (
+                'Sign Up'
+              )}
+            </button>
+          </div>
+          <p className={'text-center text-xs my-4 font-semibold'}>
+            Don't have an account?{' '}
+            <span className={'underline'}>
+              <Link href={'/signup'}>Sign Up</Link>
+            </span>
+          </p>
         </div>
-        <p className={'text-center text-xs my-4 font-semibold'}>
-          Don't have an account?{' '}
-          <span className={'underline'}>
-            <Link href={'/signup'}>Sign Up</Link>
-          </span>
-        </p>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }
