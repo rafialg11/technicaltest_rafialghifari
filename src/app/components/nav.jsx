@@ -28,7 +28,7 @@ export default function Navigation() {
 
   useEffect(() => {
     checkLoginStatus();
-  }, []);
+  }, [checkLoginStatus()]);
   const handleLogout = async () => {
     try {
       await axios.get('/api/users/logout');

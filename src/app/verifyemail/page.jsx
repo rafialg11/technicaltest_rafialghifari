@@ -22,13 +22,13 @@ export default function VerifyEmail() {
   useEffect(() => {
     const urlToken = window.location.search.split('=')[1];
     setToken(urlToken || '');
-  }, []);
+  }, [urlToken, setToken]);
 
   useEffect(() => {
     if (token.length > 0) {
       verifyUserEmail();
     }
-  }, [token]);
+  }, [token, verifyUserEmail()]);
 
   useEffect(() => {
     if (verified) {
