@@ -62,7 +62,7 @@ export default function SignUp() {
       user.username.length > 0 &&
       user.password.length >= 7;
     setButtonDisabled(!allFilledAndValid);
-  }, [user, passwordErrors]);
+  }, [user.email, passwordErrors.length, user.username, user.password]);
 
   const handleEmail = (e) => {
     const emailValue = e.target.value;

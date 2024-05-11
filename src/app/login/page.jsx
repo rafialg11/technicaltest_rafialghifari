@@ -59,7 +59,7 @@ export default function Login() {
     } else {
       setButtonDisabled(true);
     }
-  }, [user.email, user.password]);
+  }, [user.email.length, user.password.length]);
 
   return (
     <>
