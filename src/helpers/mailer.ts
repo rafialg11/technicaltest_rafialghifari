@@ -26,23 +26,23 @@ export const sendEmail = async ({ email, userId }: any) => {
       from: 'raffialg11@gmail.com',
       to: email,
       subject: 'Verify Your Email Address to Complete Registration',
-      html: `<p style="font-family: 'Roboto', sans-serif;">
+      html: `<p style="font-family: 'Roboto', sans-serif; font-size: 14px;">
             Hello ${username},
-            <br/>
+            <br/><br/>
             Thank you for signing up with MAIA! We're thrilled to have you on board.
-            <br/>
+            <br/><br/>
             To ensure the security of your account and access all the features, please verify your email address by clicking the link below:
-            <br/>
-            <a href="${process.env.DOMAIN}/verifyemail?token=${hashedToken}">Click Here!</a>
-            <br/>
+            <br/><br/>
+            <a href="${process.env.DOMAIN}/verifyemail?token=${hashedToken}" style="font-weight: bold;">Click Here!</a>
+            <br/><br/>
             If you have trouble clicking the link, please copy and paste it into your browser's address bar.
-            <br/>
+            <br/><br/>
             Once your email is verified, you'll be ready to dive into MAIA exciting features.
-
+            <br/><br/>
             If you did not register with us, please ignore this email or contact our support team at support@maiadigital.id.
-            <br/>
+            <br/><br/>
             Thank you for choosing MAIA!
-            <br/>
+            <br/><br/>
             Best regards,
             MAIA</p>`,
     };

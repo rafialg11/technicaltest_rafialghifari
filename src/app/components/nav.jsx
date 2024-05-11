@@ -20,7 +20,7 @@ export default function Navigation() {
     } catch (error) {
       if (error.response && error.response.status === 400) {
         setIsLoggedIn(false);
-      } else {        
+      } else {
         console.error(error);
       }
     }
@@ -28,16 +28,17 @@ export default function Navigation() {
 
   useEffect(() => {
     checkLoginStatus();
-  }, []); 
+  }, []);
   const handleLogout = async () => {
     try {
       await axios.get('/api/users/logout');
       router.push('/login');
       setIsLoggedIn(false);
+      localStorage.removeItem('email');
     } catch (error) {
       console.log(error);
     }
-  };  
+  };
 
   return (
     <div className="flex justify-between px-12">

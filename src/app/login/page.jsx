@@ -26,15 +26,15 @@ export default function Login() {
       console.log('Login success', response.data);
       router.push('/');
     } catch (error) {
-      //check if user is not verified
-      console.log(error.response.data.error)
+      //error message if user is not verified
+      console.log(error.response.data.error);
       if (error.response.data.error === 'User not verified') {
         setErrorMessage(
           'Oops! It seems this email is not verified. Please check your email and verify your account',
         );
         setShowErrorMessage(true);
       }
-      //check if username and password is wrong
+      //error message if username and password is wrong
       if (error.response && error.response.status === 404) {
         setErrorMessage(
           `The email and password you entered don't match. Please try again`,
@@ -42,6 +42,11 @@ export default function Login() {
         setShowErrorMessage(true);
       } else {
         console.log('Login failed', error.message);
+      }
+      //error message if too many requests
+      if (error.response && error.response.status === 429) {
+        setErrorMessage('Too many requests. Please try again in 1 minutes.');
+        setShowErrorMessage(true);
       }
     } finally {
       setLoading(false);
