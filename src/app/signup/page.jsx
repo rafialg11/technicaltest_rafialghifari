@@ -112,13 +112,20 @@ export default function SignUp() {
     }
   };
 
+  //send email value to cookie
+  useEffect(() => {
+    if (user.email) {
+      document.cookie = `email=${user.email}`;
+    }
+  }, [user.email]);
+
   return (
     <>
       <Navigation />
       <main
-        className={'bg-gray1 flex min-h-[calc(100vh-4.125rem)] justify-center'}
+        className={'flex justify-center'}
       >
-        <div className={'flex flex-col my-10 mx-auto max-w-96'}>
+        <div className={'flex flex-col my-10 max-sm:my-4 mx-auto max-sm:mx-4 max-w-96 '}>
           <h1 className={'font-semibold text-lg pb-4'}>Sign up to Maia</h1>
           <div className={'flex flex-col container-sm'}>
             <Input

@@ -8,21 +8,21 @@ export default function VerifyEmail() {
   const router = useRouter();
   const [token, setToken] = useState('');
   const [verified, setVerified] = useState(false);
-  const email = JSON.parse(localStorage.getItem('email'));
   const verifyUserEmail = async () => {
     try {
       await axios.post('/api/users/verifyemail', { token });
       setVerified(true);
-    } catch (error) {
-      router.push('/signup');
-      alert(JSON.stringify(error.response.data.error));
+    } catch (error) {      
+      if (error.response && error.response.status === 401) {
+        alert('Invalid token, try signing up again');
+    }
     }
   };
 
   useEffect(() => {
     const urlToken = window.location.search.split('=')[1];
     setToken(urlToken || '');
-  }, [urlToken, setToken]);
+  }, [setToken]);
 
   useEffect(() => {
     if (token.length > 0) {
@@ -36,11 +36,15 @@ export default function VerifyEmail() {
     }
   }, [verified, router]);
 
+  //access cookie email   
+  const email = JSON.parse(localStorage.getItem('email'));    
+  
+
   return (
     <>
       <Navigation />
       <main className={'bg-gray1 flex h-[calc(100vh-4.125rem)] justify-center'}>
-        <div className={'flex flex-col mt-24 max-w-[32rem]'}>
+        <div className={'flex flex-col mt-24 max-sm:mt-4 max-w-[32rem] mx-4'}>
           <h1 className={'font-semibold text-lg pb-4'}>
             Verify Your Email to Get Started
           </h1>

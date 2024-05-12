@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Overview
 
-First, run the development server:
+This project implements a comprehensive authentication system for a Next.js application. The system provides a secure and user-friendly way to manage user accounts and handle authentication flows.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Here are the key features of the authentication system:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- User registration: Allows users to create an account by providing their email and password.
+- Email verification: Ensures the authenticity of user accounts by requiring email verification.
+- Login: Enables users to log in to their accounts using their email and password.
 
-You can start editing the page by modifying `app/page.jsx`. The page auto-updates as you edit the file.
+## Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+To install and set up the authentication system, follow these steps:
 
-## Learn More
+1. Clone the repository: `git clone https://github.com/rafialg11/technicaltest_rafialghifari.git`
+2. Navigate to the project directory: `cd technicaltest_rafialghifari`
+3. Install the dependencies: `npm install` or `yarn install`
+4. Configure the environment variables: Copy the `.env.example` file to `.env.local` and provide the necessary configuration values.
+5. Start the development server: `npm run dev` or `yarn dev`
 
-To learn more about Next.js, take a look at the following resources:
+## Configuration
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The authentication system can be configured for different environments and use cases. Here are some of the common configurations:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Environment variables: Set the necessary environment variables in the `.env.local` file.
+- Database configuration: Configure the database connection details in the `dbConfig/dbConfig.js` file.
 
-## Deploy on Vercel
+## Usage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Here's how to use the authentication system:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- User registration: Visit the `/signup` page and provide the required information.
+- Email verification: Check your email for the verification link and click on it to verify your account.
+- Login: Visit the `/login` page and enter your email and password.
+- Logout: Once you're logged in, click on the logout button on the top right corner of the page.
+
+

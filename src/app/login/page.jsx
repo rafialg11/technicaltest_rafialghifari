@@ -65,13 +65,12 @@ export default function Login() {
     <>
       <Navigation />
       <main
-        className={'bg-gray1 flex min-h-[calc(100vh-4.125rem)] justify-center'}
+        className={'flex justify-center'}
       >
-        <div className={'flex flex-col my-10 mx-auto max-w-96'}>
+        <div className={'flex flex-col my-10 max-sm:my-4 mx-auto max-sm:mx-4 max-w-96 '}>
           <h1 className={'font-semibold text-lg pb-4'}>Welcome Back!</h1>
           <p className={'text-xs mb-8 font-medium'}>
-            Sign in below to access your workspace and continue your projects.
-            Let's pick up where you left off!
+            Sign in below to access your workspace and continue your projects. Let's pick up where you left off!
           </p>
           <div className={'flex flex-col container-sm'}>
             <Input
@@ -118,12 +117,12 @@ export default function Login() {
                   />
                 </div>
               ) : (
-                'Sign Up'
+                'Sign In'
               )}
             </button>
           </div>
           <p className={'text-center text-xs my-4 font-semibold'}>
-            Don't have an account?{' '}
+            Don't have an account? 
             <span className={'underline'}>
               <Link href={'/signup'}>Sign Up</Link>
             </span>

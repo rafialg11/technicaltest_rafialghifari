@@ -9,26 +9,26 @@ import { useState, useEffect } from 'react';
 export default function Navigation() {
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const checkLoginStatus = async () => {
-    try {
-      const response = await axios.get('/api/users/getuser');
-      if (response.data.data) {
-        setIsLoggedIn(true);
-      } else {
-        setIsLoggedIn(false);
-      }
-    } catch (error) {
-      if (error.response && error.response.status === 400) {
-        setIsLoggedIn(false);
-      } else {
-        console.error(error);
-      }
-    }
-  };
 
   useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const response = await axios.get('/api/users/getuser');
+        if (response.data.data) {
+          setIsLoggedIn(true);
+        } else {
+          setIsLoggedIn(false);
+        }
+      } catch (error) {
+        if (error.response && error.response.status === 400) {
+          setIsLoggedIn(false);
+        } else {
+          console.error(error);
+        }
+      }
+    };
     checkLoginStatus();
-  }, [checkLoginStatus]);
+  }, []);
   const handleLogout = async () => {
     try {
       await axios.get('/api/users/logout');
@@ -41,15 +41,16 @@ export default function Navigation() {
   };
 
   return (
-    <div className="flex justify-between px-12">
+    <div className="bg-white flex justify-between px-12 max-sm:px-4">
+      <Link href={'/'}>
       <Image
         src="/logo.svg"
         alt="logo trello"
-        width={90}
+        width={80}
         height={18}
         priority
-        className="my-6"
-      />
+        className={`max-sm:my-4 my-6 lg:w-20 w-8'}`}
+      /></Link>
       <div className="my-auto">
         {isLoggedIn ? (
           <Button text="Logout" variant="btn-primary" onClick={handleLogout} />

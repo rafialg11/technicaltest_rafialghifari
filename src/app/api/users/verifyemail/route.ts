@@ -13,17 +13,11 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     // Find the user with the given verification token
     const user = await findUserByToken(token);
 
-    if (!user) {
-      // If the user is not found, remove the verification token and return an error
-      await removeUserByToken(token);
-      return NextResponse.json(
-        { error: 'Invalid token, try signing up again' },
-        { status: 400 },
-      );
-    }
-
     // Update the user's email as verified
-    await updateUser(user);
+    user.isVerified = true;
+    user.verifyToken = undefined;
+    user.verifyTokenExpiry = undefined;
+    await user.save();
 
     // Return success response with the user's email
     return NextResponse.json(
@@ -37,19 +31,21 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 }
 
 async function findUserByToken(token: string) {
-  return User.findOne({
+  const user = await User.findOne({
     verifyToken: token,
     verifyTokenExpiry: { $gt: Date.now() },
   });
+  if (!user) {    
+    await removeUserByToken(token);
+    return NextResponse.json(
+      { error: 'Invalid token, try signing up again' },
+      { status: 401 },
+    );
+  }
+  return user;
 }
 
 async function removeUserByToken(token: string) {
   await User.findOneAndDelete({ verifyToken: token });
 }
 
-async function updateUser(user: any) {
-  user.isVerified = true;
-  user.verifyToken = undefined;
-  user.verifyTokenExpiry = undefined;
-  await user.save();
-}

@@ -97,6 +97,10 @@ video {
   @apply bg-btn-nav text-white font-medium text-sm py-1.5 px-2 rounded hover:bg-blue-900 transition duration-300;
 }
 
+body{
+  background-color: #F1F5F9;
+}
+
 .btn-noStyle {
   @apply text-primary font-medium text-sm py-1.5 px-2 rounded hover:font-bold transition duration-300;
 }
