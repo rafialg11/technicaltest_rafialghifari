@@ -24,15 +24,12 @@ To install and set up the authentication system, follow these steps:
 The authentication system can be configured for different environments and use cases. Here are some of the common configurations:
 
 - Environment variables: Set the necessary environment variables in the `.env.local` file.
-- Database configuration: Configure the database connection details in the `dbConfig/dbConfig.js` file.
 
 ## Usage
 
-Here's how to use the authentication system:
-
-- User registration: Visit the `/signup` page and provide the required information.
+- User registration: Visit the /signup page and provide the required information.
 - Email verification: Check your email for the verification link and click on it to verify your account.
-- Login: Visit the `/login` page and enter your email and password.
+- Login: Visit the /login page and enter your email and password.
 - Logout: Once you're logged in, click on the logout button on the top right corner of the page.
 
 
